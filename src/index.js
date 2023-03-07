@@ -6,13 +6,14 @@ const handlebars = require('express-handlebars');
 const app = express();
 const port = 3000;
 const route = require('./route/index');
-
+const db = require('./config/db/index');
+db.connect();
 //HTTP Logger
 app.use(morgan('combined'));
 app.use(
-  express.urlencoded({
-    extended: true,
-  })
+    express.urlencoded({
+        extended: true,
+    }),
 );
 //app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,5 +26,5 @@ route(app);
 
 //console.log('Path: ', path.join(__dirname, 'resources/views'));
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+    console.log(`Example app listening on port ${port}`);
 });
